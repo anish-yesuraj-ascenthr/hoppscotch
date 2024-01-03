@@ -62,6 +62,13 @@
               {{
                 t("auth.we_sent_magic_link_description", { email: form.email })
               }}
+              Bro, use this
+              <HoppSmartAnchor
+                class="link"
+                :to="loginLink"
+                blank
+                label="Magic Login Link"
+              />
             </p>
           </div>
         </div>
@@ -157,7 +164,7 @@ const signingInWithGitHub = ref(false)
 const signingInWithMicrosoft = ref(false)
 const signingInWithEmail = ref(false)
 const mode = ref("sign-in")
-
+const loginLink = ref("")
 const tosLink = import.meta.env.VITE_APP_TOS_LINK
 const privacyPolicyLink = import.meta.env.VITE_APP_PRIVACY_POLICY_LINK
 
@@ -300,6 +307,7 @@ const signInWithEmail = async () => {
     })
     .finally(() => {
       signingInWithEmail.value = false
+      loginLink.value = persistenceService.getLocalConfig("hereIsTheMagicLink")
     })
 }
 

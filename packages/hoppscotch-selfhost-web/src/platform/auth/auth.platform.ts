@@ -180,6 +180,7 @@ async function sendMagicLink(email: string) {
       "deviceIdentifier",
       res.data.deviceIdentifier
     )
+    persistenceService.setLocalConfig("hereIsTheMagicLink", res.data.loginLink)
   } else {
     throw new Error("test: does not get device identifier")
   }
